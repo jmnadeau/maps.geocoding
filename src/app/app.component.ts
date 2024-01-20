@@ -19,8 +19,19 @@ export class AppComponent {
     {lat: 38, lng: -8},
   ];
 
+  polylineOptions = {
+    path: this.markerPositions,
+    strokeColor: '#32a1d0',
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  };
+
+  latitude: number = 0;
+  longitude: number = 0;
+
   // #3 Le ViewChild permet d'avoir accès à l'élément GoogleMaps dans le template HTML
   @ViewChild('googlemaps') map!: GoogleMap;
+  @ViewChild('maplines') maplines!: GoogleMap;
 
   // Après l'initialisation de la vue les ViewChild sont assignées
   ngAfterViewInit(){
@@ -33,5 +44,12 @@ export class AppComponent {
     // On ajuste la carte aux limites
     // Le center et le niveau de zoom sont assignés automatiquement
     this.map!.fitBounds(bounds);
+  }
+
+  getLatLngFromMap(event: google.maps.MapMouseEvent) {
+    console.log(event);
+
+    this.latitude = event.latLng!.lat();
+    this.longitude = event.latLng!.lng();
   }
 }

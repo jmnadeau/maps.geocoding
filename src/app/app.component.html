@@ -22,3 +22,25 @@
               [position]="marker">
   </map-marker>
 </google-map>
+
+<h1>4 - Ajouts de lines sur la carte</h1>
+<google-map
+  [center]="center"
+  [zoom]="zoom">
+  <map-polyline [options]="polylineOptions">
+  </map-polyline>
+</google-map>
+
+<h1>5 - Récupérer Latitude et Longitude</h1>
+<!-- Le #maplines est utilisé dans le ViewChild -->
+<p>
+  Latitude : {{latitude}}
+</p>
+<p>
+  Longitude : {{longitude}}
+</p>
+<google-map #maplines
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="getLatLngFromMap($event)">
+</google-map>
